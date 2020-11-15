@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Svg from "react-native-svg";
+import Svg, {G} from "react-native-svg";
 import { Animated, Dimensions, Easing } from "react-native";
 import { svgPathProperties } from "svg-path-properties";
 
@@ -107,19 +107,22 @@ class AnimatedSVGPath extends Component {
       strokeDashArray: dashArray,
       transform,
     } = this.props;
+    let wd = width*scale;
     return (
-      <Svg height={height * scale + 5} width={width * scale + 5}>
-        <Path
-          strokeDasharray={dashArray || [this.length, this.length]}
-          strokeDashoffset={this.strokeDashoffset}
-          strokeWidth={strokeWidth}
-          strokeLinecap={strokeLinecap}
-          stroke={strokeColor}
-          scale={scale}
-          fill={fill}
-          transform={transform}
-          d={d}
-        />
+      <Svg height={height} width={width * scale + 5}>
+        <G transform={`translate(${wd/3.5} 50) scale(1,1)`}>
+          <Path
+            strokeDasharray={dashArray || [this.length, this.length]}
+            strokeDashoffset={this.strokeDashoffset}
+            strokeWidth={strokeWidth}
+            strokeLinecap={strokeLinecap}
+            stroke={strokeColor}
+            scale={scale}
+            fill={fill}
+            transform={transform}
+            d={d}
+          />
+        </G>
       </Svg>
     );
   }
